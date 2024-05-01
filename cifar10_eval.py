@@ -3,7 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 import torchvision.models as models
 
-# Load the CIFAR-10 testing dataset and apply the same transformations used during training
+# Load the CIFAR-10 dataset/apply transformations 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -17,7 +17,7 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=64, shuffle=False)
 resnet = models.resnet18(pretrained=True)
 resnet.fc = torch.nn.Linear(resnet.fc.in_features, 10)  # Modify the last fully connected layer for CIFAR-10
 
-# Load the saved model weights
+# Load weights
 resnet.load_state_dict(torch.load('resnet_model.pth'))
 
 # Evaluation
